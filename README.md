@@ -4,6 +4,8 @@ This text based tutorial is based on the Corey Schafer's Playlist - [Flask Tutor
 Note that all the current Progress will be stored inside the [src](https://github.com/invader43/Flask-Learning-Path/blob/main/src) folder until the project is completed.
 
 ### Guides to all Parts
-1. [Part 1](https://github.com/invader43/Flask-Learning-Path/blob/main/Tutorials/Part1.md)
+1. [Part 1 - Introduction to Flask](https://github.com/invader43/Flask-Learning-Path/blob/main/Tutorials/Part1.md)
 
-Yet to start the rest
+2. [Part 2 - Templating using jinja2](https://github.com/invader43/Flask-Learning-Path/blob/main/Tutorials/Part2.md)
+
+3. [Part 3 - Forms and User Input](https://github.com/invader43/Flask-Learning-Path/blob/main/Tutorials/Part3.md)
