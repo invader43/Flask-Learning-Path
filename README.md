@@ -9,3 +9,5 @@ Note that all the current Progress will be stored inside the [src](https://githu
 2. [Part 2 - Templating using jinja2](https://github.com/invader43/Flask-Learning-Path/blob/main/Tutorials/Part2.md)
 
 3. [Part 3 - Forms and User Input](https://github.com/invader43/Flask-Learning-Path/blob/main/Tutorials/Part3.md)
+
+4. [Part 3 - Databases and Querying](https://github.com/invader43/Flask-Learning-Path/blob/main/Tutorials/Part4.md)
