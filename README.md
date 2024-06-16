@@ -11,3 +11,5 @@ Note that all the current Progress will be stored inside the [src](https://githu
 3. [Part 3 - Forms and User Input](https://github.com/invader43/Flask-Learning-Path/blob/main/Tutorials/Part3.md)
 
 4. [Part 4 - Databases and Querying](https://github.com/invader43/Flask-Learning-Path/blob/main/Tutorials/Part4.md)
+
+5. [Part 5 - Packaging and folder structures](https://github.com/invader43/Flask-Learning-Path/blob/main/Tutorials/Part5.md)
