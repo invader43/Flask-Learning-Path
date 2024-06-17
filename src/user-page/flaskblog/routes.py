@@ -1,5 +1,5 @@
 from flask import render_template,url_for,flash,redirect,request
-from flaskblog.forms import RegForm , LoginForm
+from flaskblog.forms import RegForm , LoginForm , UpdateAccountForm
 from flaskblog.models import User,Post
 from flaskblog import app,bcrypt,db
 from flask_login import login_user, current_user , logout_user , login_required
@@ -35,7 +35,7 @@ def aboutme():
 def register():
     form = RegForm()
     if current_user.is_authenticated:
-        flash(f'Youre already logged in','success')
+        flash(f"You're already logged in",'success')
         return redirect(url_for('home'))
 
     if form.validate_on_submit():
@@ -85,9 +85,26 @@ def logout():
     return redirect(url_for('home'))
 
 
-@app.route("/account")
+@app.route("/account" , methods = ['GET','POST'])
 @login_required
 def account():
+    form = UpdateAccountForm()
+
+    if form.validate_on_submit():
+        #  add the user into the database
+        current_user.username = form.username.data
+        current_user.email = form.email.data
+        # flask_login automates the process of adding it into the database ,
+        # we dont need to do the db.session.add here , we can do this manually , 
+        # but it would make the code redundant 
+        db.session.commit()
+        flash("Your Account has been updated" , 'success')
+        return redirect(url_for('account'))
+        # why not render template instead of redirect  - ?? Post Get Redirect Pattern 
+        # "are you sure you want to reload this page " , redirect sends a get request
+        # read more here en.wikipedia.org/wiki/Post/Redirect/Get
+
     #setting the image file , now we send it to our template
     image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
-    return render_template('account.html' , title = 'Account' , image_file = image_file)
+    # https://peps.python.org/pep-0008/ talking about pep8 compliance
+    return render_template('account.html' ,title = 'Account' ,image_file = image_file , form=form) 
