@@ -23,7 +23,7 @@ class RegForm(FlaskForm):
 
     submit = SubmitField('Sign Up')
 
-
+    # https://wtforms.readthedocs.io/en/2.3.x/forms/#in-line-validators 
     def validate_username(self , username):
         user = User.query.filter_by(username = username.data).first() 
         if user :
