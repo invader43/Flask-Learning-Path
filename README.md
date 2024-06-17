@@ -13,3 +13,8 @@ Note that all the current Progress will be stored inside the [src](https://githu
 4. [Part 4 - Databases and Querying](https://github.com/invader43/Flask-Learning-Path/blob/main/Tutorials/Part4.md)
 
 5. [Part 5 - Packaging and folder structures](https://github.com/invader43/Flask-Learning-Path/blob/main/Tutorials/Part5.md)
+
+
+
+### Further Links
+[Miguel Grinberg - Flask Mega-Tutorial](https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world)
