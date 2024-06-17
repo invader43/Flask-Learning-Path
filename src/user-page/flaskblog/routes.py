@@ -1,10 +1,13 @@
 from flask import render_template,url_for,flash,redirect,request
 import secrets # for generating hex 
 import os # for getting file type 
+from PIL import Image
 from flaskblog.forms import RegForm , LoginForm , UpdateAccountForm
 from flaskblog.models import User,Post
 from flaskblog import app,bcrypt,db
 from flask_login import login_user, current_user , logout_user , login_required
+
+
 posts = [
     {
         'author': 'dr blake',
@@ -58,17 +61,6 @@ def register():
     return render_template('register.html' , title='Register', form = form)
 
 
-def save_picture(form_picture):
-    # its not good to store the filename thats sent thru user 
-    # its not even good to use username to store filename , if image files leak 
-    # using the secrets module to generate a hex 
-    random_hex = secrets.token_hex(8)
-    _ , f_ext = os.path.splitext(form_picture.filename)
-    picture_filename = random_hex + f_ext
-    picture_path = os.path.join(app.root_path , 'static/profile_pics' , picture_filename)
-    form_picture.save(picture_path)
-    return picture_filename
-
 @app.route("/login", methods = ['GET','POST'])
 def login():
     form = LoginForm()
@@ -96,6 +88,22 @@ def logout():
     logout_user()
     return redirect(url_for('home'))
 
+def save_picture(form_picture):
+    # its not good to store the filename thats sent thru user 
+    # its not even good to use username to store filename , if image files leak 
+    # using the secrets module to generate a hex 
+    random_hex = secrets.token_hex(8)
+    _ , f_ext = os.path.splitext(form_picture.filename)
+    picture_filename = random_hex + f_ext
+    picture_path = os.path.join(app.root_path , 'static/profile_pics' , picture_filename)
+
+    output_size = (125,125)
+
+    image_resized = Image.open(form_picture)
+    image_resized.thumbnail(output_size)
+    image_resized.save(picture_path)
+
+    return picture_filename
 
 @app.route("/account" , methods = ['GET','POST'])
 @login_required
@@ -105,8 +113,11 @@ def account():
     if form.validate_on_submit():
         #checking if picture file is uploaded
         if form.picture.data :
-            # a new function called save_picture()
-            current_user.image_file = save_picture(form.picture.data)
+            old_picture_path = os.path.join(app.root_path , 'static/profile_pics' , current_user.image_file)
+            if os.path.isfile(old_picture_path): os.remove(old_picture_path)
+            # a new function called save_picture() , note that save_picture also creates a new file
+            picture_file = save_picture(form.picture.data)
+            current_user.image_file = picture_file
 
         #  add the user into the database
         current_user.username = form.username.data
