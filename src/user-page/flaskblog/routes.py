@@ -103,6 +103,14 @@ def account():
         # why not render template instead of redirect  - ?? Post Get Redirect Pattern 
         # "are you sure you want to reload this page " , redirect sends a get request
         # read more here en.wikipedia.org/wiki/Post/Redirect/Get
+    
+
+    # Basically if we are visiting the site after a login , and user is seeing it after
+    # a get request , we want to populate the form with the current username and email
+    elif request.method == 'GET' :
+        form.username.data = current_user.username
+        form.email.data = current_user.email
+
 
     #setting the image file , now we send it to our template
     image_file = url_for('static', filename='profile_pics/' + current_user.image_file)

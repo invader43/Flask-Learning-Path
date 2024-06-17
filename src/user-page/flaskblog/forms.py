@@ -1,4 +1,5 @@
-from flask_wtf import FlaskForm
+from flask_wtf import FlaskForm 
+from flask_wtf.file import FileField , FileAllowed # for having insertable images for profile pic
 from wtforms import StringField , PasswordField , SubmitField , BooleanField
 from wtforms.validators import DataRequired, Length , Email , EqualTo , ValidationError
 from flaskblog.models import User
@@ -57,6 +58,7 @@ class UpdateAccountForm(FlaskForm):
         Email()
     ])
 
+    picture = FileField('Update Profile Picture' , validators=[FileAllowed(['jpg' , 'png'])])
     submit = SubmitField('Update Details')
 
     # https://wtforms.readthedocs.io/en/2.3.x/forms/#in-line-validators 
