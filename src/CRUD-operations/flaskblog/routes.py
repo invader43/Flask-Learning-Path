@@ -8,27 +8,43 @@ from flaskblog import app,bcrypt,db
 from flask_login import login_user, current_user , logout_user , login_required
 
 
-posts = [
-    {
-        'author': 'dr blake',
-        'title': 'Blog 1',
-        'content': 'hello world this is my first blog page',
-        'date_posted':'August 1,2024'
-    },
-    {
-        'author': 'dr blake',
-        'title': 'Blog 2',
-        'content': 'This is the second post for testing this template',
-        'date_posted':'August 2,2024'
-    }
-]
+from datetime import datetime, timedelta
+
+def time_ago_string(past_datetime):
+    current_datetime = datetime.utcnow()
+    time_difference = current_datetime - past_datetime
+
+    # Calculate time difference in seconds
+    seconds_diff = time_difference.total_seconds()
+    print(f'current time is - {current_datetime} and post time is {past_datetime}')
+    print(f'time diff {time_difference}')
+    # Determine the appropriate time ago string based on the time difference
+    if seconds_diff < 60:
+        return f"{int(seconds_diff)} seconds ago"
+    elif seconds_diff < 3600:
+        minutes_diff = seconds_diff / 60
+        return f"{int(minutes_diff)} minutes ago"
+    elif seconds_diff < 86400:
+        hours_diff = seconds_diff / 3600
+        return f"{int(hours_diff)} hours ago"
+    elif seconds_diff < 604800:
+        days_diff = seconds_diff / 86400
+        return f"{int(days_diff)} days ago"
+    elif seconds_diff < 31536000:
+        weeks_diff = seconds_diff / 604800
+        return f"{int(weeks_diff)} weeks ago"
+    else:
+        years_diff = seconds_diff / 31536000
+        return f"{int(years_diff)} years ago"
 
 
 
 @app.route("/")
 @app.route("/home")
 def home():
-    return render_template('home.html', posts = posts)
+    posts = Post.query.all()
+    print(posts)
+    return render_template('home.html', posts = posts , datetimefunc = time_ago_string)
 
 
 @app.route("/about")
@@ -152,6 +168,9 @@ def new_post():
     form = PostForm()
 
     if form.validate_on_submit():
+        post = Post(title=form.title.data , content = form.content.data , author = current_user)
+        db.session.add(post)
+        db.session.commit()
         flash('Your post has been created' , 'success')
         return redirect(url_for('home'))
     
