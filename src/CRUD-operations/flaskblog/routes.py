@@ -16,8 +16,6 @@ def time_ago_string(past_datetime):
 
     # Calculate time difference in seconds
     seconds_diff = time_difference.total_seconds()
-    print(f'current time is - {current_datetime} and post time is {past_datetime}')
-    print(f'time diff {time_difference}')
     # Determine the appropriate time ago string based on the time difference
     if seconds_diff < 60:
         return f"{int(seconds_diff)} seconds ago"
@@ -177,3 +175,14 @@ def new_post():
 
     
     return render_template('create_post.html',title='New Post' , form = form )
+
+
+@app.route("/post/<int:post_id>")
+def post(post_id):
+    # We need to use get or 404 in cases we dont know if the query fails or passes
+    # before hand 
+    post = Post.query.get_or_404(post_id)
+
+    return render_template('post.html' , title = post.title , post = post , datetimefunc = time_ago_string )
+
+
