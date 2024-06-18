@@ -2,7 +2,7 @@ from flask import render_template,url_for,flash,redirect,request
 import secrets # for generating hex 
 import os # for getting file type 
 from PIL import Image
-from flaskblog.forms import RegForm , LoginForm , UpdateAccountForm
+from flaskblog.forms import RegForm , LoginForm , UpdateAccountForm , PostForm
 from flaskblog.models import User,Post
 from flaskblog import app,bcrypt,db
 from flask_login import login_user, current_user , logout_user , login_required
@@ -114,7 +114,7 @@ def account():
         #checking if picture file is uploaded
         if form.picture.data :
             old_picture_path = os.path.join(app.root_path , 'static/profile_pics' , current_user.image_file)
-            if os.path.isfile(old_picture_path): os.remove(old_picture_path)\
+            if os.path.isfile(old_picture_path): os.remove(old_picture_path)
             # a new function called save_picture() , note that save_picture also creates a new file
             picture_file = save_picture(form.picture.data)
             current_user.image_file = picture_file
@@ -144,3 +144,17 @@ def account():
     image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
     # https://peps.python.org/pep-0008/ talking about pep8 compliance
     return render_template('account.html' ,title = 'Account' ,image_file = image_file , form=form) 
+
+
+@app.route("/post/new" , methods = ['GET','POST'])
+@login_required
+def new_post():
+    form = PostForm()
+
+    if form.validate_on_submit():
+        flash('Your post has been created' , 'success')
+        return redirect(url_for('home'))
+    
+
+    
+    return render_template('create_post.html',title='New Post' , form = form )

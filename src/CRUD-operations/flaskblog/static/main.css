@@ -1,0 +1,80 @@
+body {
+  background: #1A1A1A; /* dark background */
+  color: #FFFFFF; /* light text color */
+  margin-top: 5rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #CCCCCC; /* light gray headings */
+}
+
+.bg-steel {
+  background-color: #343A40; /* dark steel background */
+}
+
+.site-header .navbar-nav .nav-link {
+  color: #AAAAAA; /* light gray nav links */
+}
+
+.site-header .navbar-nav .nav-link:hover {
+  color: #FFFFFF; /* white nav links on hover */
+}
+
+.site-header .navbar-nav .nav-link.active {
+  font-weight: 500;
+}
+
+.content-section {
+  background: #2F2F2F; /* dark background */
+  padding: 10px 20px;
+  border: 1px solid #444444; /* dark border */
+  border-radius: 3px;
+  margin-bottom: 20px;
+}
+
+.article-title {
+  color: #CCCCCC; /* light gray article title */
+}
+
+a.article-title:hover {
+  color: #66D9EF; /* blue article title on hover */
+  text-decoration: none;
+}
+
+.article-content {
+  white-space: pre-line;
+}
+
+.article-img {
+  height: 65px;
+  width: 65px;
+  margin-right: 16px;
+}
+
+.article-metadata {
+  padding-bottom: 1px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid #444444; /* dark border */
+}
+
+.article-metadata a:hover {
+  color: #66D9EF; /* blue metadata link on hover */
+  text-decoration: none;
+}
+
+.article-svg {
+  width: 25px;
+  height: 25px;
+  vertical-align: middle;
+}
+
+.account-img {
+  height: 125px;
+  width: 125px;
+  margin-right: 20px;
+  margin-bottom: 16px;
+}
+
+.account-heading {
+  font-size: 2.5rem;
+}
