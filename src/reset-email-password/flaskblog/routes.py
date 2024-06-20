@@ -5,8 +5,9 @@ from PIL import Image
 from flaskblog.forms import (RegForm , LoginForm , UpdateAccountForm , PostForm ,
                               RequestResetForm , ResetPasswordForm)
 from flaskblog.models import User,Post
-from flaskblog import app,bcrypt,db
+from flaskblog import app,bcrypt,db,mail
 from flask_login import login_user, current_user , logout_user , login_required
+from flask_mail import Message
 
 
 from datetime import datetime, timedelta
@@ -239,6 +240,14 @@ def user_posts(username):
 
 
 def send_reset_email(user):
+    token = user.get_reset_token()
+    msg = Message('Password Reset Request' ,
+                sender = 'noreply@flaskblog_invader43.com',
+                recipients=[user.email])
+    msg.body = f'''To reset your password , visit the following link :
+    {url_for('reset_token' , token = token , _external = True )}
+    If you did not make this request , simply ignore the email. 
+'''
     pass
 
 
@@ -271,5 +280,14 @@ def reset_token(token):
         return redirect(url_for('reset_request'))
     
     form = ResetPasswordForm()
+    if form.validate_on_submit():
+        #first generate hashedPassword
+        hashedPass = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        # add and commit to database 
+        user.password = hashedPass
+        db.session.commit()
+
+        flash(f'Account password updated','success')
+        return redirect(url_for('login'))
 
     return render_template('reset_token.html' , title ='Reset Password' , form = form )
