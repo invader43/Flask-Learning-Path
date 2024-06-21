@@ -248,7 +248,7 @@ def send_reset_email(user):
     {url_for('reset_token' , token = token , _external = True )}
     If you did not make this request , simply ignore the email. 
 '''
-    pass
+    mail.send(msg)
 
 
 

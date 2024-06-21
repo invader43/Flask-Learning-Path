@@ -87,14 +87,13 @@ class RequestResetForm(FlaskForm):
     email = StringField('Email',
                         validators=[DataRequired() ,Email()])
     
-    submit = SubmitField('Password Reset request sent')
+    submit = SubmitField('Request Reset Password')
 
     def validate_email(self , email):
-        if email.data != current_user.email:
-            user = User.query.filter_by(email = email.data).first() 
-            if user is None :
-                raise ValidationError("Email doesn't exist , Create an account before resetting the password")
-            
+        user = User.query.filter_by(email = email.data).first() 
+        if user is None :
+            raise ValidationError("Email doesn't exist , Create an account before resetting the password")
+        
 
 
             
@@ -107,4 +106,4 @@ class ResetPasswordForm(FlaskForm):
         EqualTo('password')
     ])
 
-    submit = SubmitField('Reset Password')
+    submit = SubmitField('Reset Password')  
