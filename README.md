@@ -18,7 +18,7 @@ Note that all the current Progress will be stored inside the [src](https://githu
 
 Current tree structure after adding blueprints : 
 
-![Alt text](image.png)
+![](https://github.com/invader43/Flask-Learning-Path/blob/main/image.png)
 
 ### Further Links
 [Miguel Grinberg - Flask Mega-Tutorial](https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world)
