@@ -4,6 +4,7 @@ import os # for getting file type
 from PIL import Image
 from flask import url_for, current_app
 from flaskblog import mail
+from flask_mail import Message
 
 def time_ago_string(past_datetime):
     current_datetime = datetime.utcnow()
