@@ -4,7 +4,7 @@ import os # for getting file type
 from flaskblog.users.forms import (RegForm , LoginForm , UpdateAccountForm ,
                               RequestResetForm , ResetPasswordForm)
 from flaskblog.models import User,Post
-from flaskblog import app,bcrypt,db
+from flaskblog import bcrypt,db
 from flask_login import login_user, current_user , logout_user , login_required
 from flaskblog.users.utils import time_ago_string , send_reset_email ,save_picture
 
@@ -73,7 +73,7 @@ def account():
     if form.validate_on_submit():
         #checking if picture file is uploaded
         if form.picture.data :
-            old_picture_path = os.path.join(app.root_path , 'static/profile_pics' , current_user.image_file)
+            old_picture_path = os.path.join(current_app.root_path , 'static/profile_pics' , current_user.image_file)
             if os.path.isfile(old_picture_path): os.remove(old_picture_path)
             # a new function called save_picture() , note that save_picture also creates a new file
             picture_file = save_picture(form.picture.data)
