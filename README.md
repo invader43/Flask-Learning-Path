@@ -1,7 +1,7 @@
 # Flask - Zero to Hero
 This text based tutorial is based on the Corey Schafer's Playlist - [Flask Tutorials](https://youtube.com/playlist?list=PL-osiE80TeTs4UjLw5MM6OjgkjFeUxCYH&si=j75AdJXhRBaV3-Vw). It talks about all the important components in a step by step fashion in 30-60 min videos. The content is broken down into 12 parts.
 
-Note that all the current Progress will be stored inside the [src](https://github.com/invader43/Flask-Learning-Path/blob/main/src) folder until the project is completed.
+Note that all the current Progress will be stored inside the [src](https://github.com/invader43/Flask-Learning-Path/blob/main/src) folder until the project is completed. Currently completed part -  [Blueprinting and Configuration - Changed Folder Structure to final](https://github.com/invader43/Flask-Learning-Path/blob/main/src/blueprints-configs)
 
 ### Guides to all Parts
 1. [Part 1 - Introduction to Flask](https://github.com/invader43/Flask-Learning-Path/blob/main/Tutorials/Part1.md)
